@@ -59,6 +59,12 @@ class Scanner:
             case '/':
                 if self.match('/'):
                     while self.peek() != '\n' and not self.end(): self.advance()
+                elif self.match('*'):
+                    while self.peek() != '*' and self.peek_next() != '/' and not self.end():
+                        if self.peek() == '\n': self.line += 1
+                        self.advance()
+                    self.advance()
+                    self.advance()
                 else:
                     self.add_token(TokenType.SLASH)
 
