@@ -3,6 +3,7 @@ from . import error_handler as err
 from .scanner import Scanner
 from .parser import Parser
 from .ast_printer import AstPrinter
+from .interpreter import Interpreter
 
 class Lox:
     def run_file(self, path: str):
@@ -31,4 +32,5 @@ class Lox:
 
         if err.had_error: return
 
-        print(AstPrinter().print(expression))
+        print(Interpreter().evaluate(expression))
+        # print(AstPrinter().print(expression))
