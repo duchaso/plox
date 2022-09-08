@@ -6,12 +6,14 @@ from .ast_printer import AstPrinter
 from .interpreter import Interpreter
 
 class Lox:
+    interpreter = Interpreter()
+
     def run_file(self, path: str):
         with open(path, 'r') as f:
             source = f.read()
             self.__run(source)
-            if err.had_error:
-                sys.exit(65)
+            if err.had_error: sys.exit(65)
+            if err.had_runtime_error: sys.exit(70) 
 
     def run_prompt(self):
         while True:
@@ -32,5 +34,6 @@ class Lox:
 
         if err.had_error: return
 
-        print(Interpreter().evaluate(expression))
+        Lox.interpreter.interpret(expression)
+        # print(Interpreter().evaluate(expression))
         # print(AstPrinter().print(expression))
